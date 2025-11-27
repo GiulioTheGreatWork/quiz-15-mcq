@@ -214,6 +214,12 @@ function App() {
           <span className="progress-text">
             Question {currentQuestion + 1} / {quizData.length}
           </span>
+          <div className="progress-bar-wrapper">
+            <div 
+              className="progress-bar-fill"
+              style={{ width: `${((currentQuestion + 1) / quizData.length) * 100}%` }}
+            ></div>
+          </div>
         </div>
 
         <h1 className="question-text">{question.question}</h1>
