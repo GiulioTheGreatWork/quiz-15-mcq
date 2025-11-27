@@ -3,23 +3,23 @@ export const quizData = [
   {
     question: "When you sit down for focused work, how long before your mind first wanders or you feel the urge to check something?",
     options: [
-      "More than 25 minutes (Strong sustained focus)",
-      "15-25 minutes (Moderate focus)",
-      "10-15 minutes (Brief focus windows)",
-      "5-10 minutes (Fragmented attention)",
-      "Less than 5 minutes (Severely fragmented)",
-      "I don't track this / Not sure"
+      "More than 25 minutes",
+      "15-25 minutes",
+      "10-15 minutes",
+      "5-10 minutes",
+      "Less than 5 minutes",
+      "I don't track this"
     ],
     answer: 0
   },
   {
     question: "How many times per hour do you estimate you switch tasks or check notifications during focused work?",
     options: [
-      "0-2 times (Excellent focus protection)",
-      "3-5 times (Moderate interruptions)",
-      "6-10 times (Frequent switching)",
-      "11-15 times (Constant interruptions)",
-      "15+ times (Completely fragmented)",
+      "0-2 times",
+      "3-5 times",
+      "6-10 times",
+      "11-15 times",
+      "15+ times",
       "I have no idea"
     ],
     answer: 0
@@ -27,31 +27,31 @@ export const quizData = [
   {
     question: "Rate your ability to sustain deep focus during your peak cognitive hours:",
     options: [
-      "1 = Cannot sustain focus even when trying",
+      "1",
 
-      "10 = Can maintain deep focus for 60-90+ minutes"
+      "10"
     ],
     answer: 0
   },
   {
     question: "When you're interrupted during focused work, how long does it take you to return to the same depth of concentration?",
     options: [
-      "1-2 minutes (Quick recovery)",
-      "3-5 minutes (Moderate recovery)",
-      "6-10 minutes (Slow recovery)",
-      "11-20 minutes (Very slow recovery)",
-      "20+ minutes or I never fully return (Severe deficit)"
+      "1-2 minutes",
+      "3-5 minutes",
+      "6-10 minutes",
+      "11-20 minutes",
+      "20+ minutes or I never fully return"
     ],
     answer: 0
   },
   {
     question: "In a typical 8-hour workday, how many hours would you estimate involve genuine deep, focused work (not meetings, emails, shallow tasks)?",
     options: [
-      "5-6+ hours (Excellent)",
-      "3-4 hours (Moderate)",
-      "1-2 hours (Low)",
-      "Less than 1 hour (Critical deficit)",
-      "Zero hours (Complete absence of deep work)"
+      "5-6+ hours",
+      "3-4 hours",
+      "1-2 hours",
+      "Less than 1 hour",
+      "Zero hours"
     ],
     answer: 0
   },
@@ -59,11 +59,11 @@ export const quizData = [
   {
     question: "When during the day does your focus typically decline most noticeably?",
     options: [
-      "No significant decline (consistent all day)",
-      "Late morning (10-11 AM)",
-      "After lunch (1-3 PM)",
-      "Mid-afternoon (3-5 PM)",
-      "Evening (after 6 PM)",
+      "Consistent all day",
+      "10-11 AM",
+      "1-3 PM",
+      "3-5 PM",
+      "After 6 PM",
       "Multiple times throughout the day"
     ],
     answer: 0
@@ -82,10 +82,10 @@ export const quizData = [
   {
     question: "How does your reading comprehension change throughout the day?",
     options: [
-      "Stays consistent (can retain information morning through evening)",
-      "Slightly worse in afternoon (need to re-read occasionally)",
-      "Noticeably worse (frequently re-reading passages)",
-      "Severely impaired (cannot retain anything by afternoon)",
+      "Can retain information morning through evening",
+      "Need to re-read occasionally",
+      "Frequently re-reading passages",
+      "Cannot retain anything by afternoon",
       "I avoid reading complex material after morning"
     ],
     answer: 0
@@ -93,20 +93,20 @@ export const quizData = [
   {
     question: "Rate your mental clarity when you first wake up (before coffee):",
     options: [
-      "1 - Completely foggy, can barely think",
+      "0",
      
-      "10 - Crystal clear, mentally sharp immediately"
+      "10"
     ],
     answer: 0
   },
   {
     question: "After 2-3 hours of cognitive work, how do you feel?",
     options: [
-      "Energized and clear (could continue indefinitely)",
-      "Slightly tired but functional (could continue)",
-      "Noticeably fatigued (need a break)",
-      "Exhausted (mentally depleted)",
-      "Completely fried (cannot continue)"
+      "Energized and clear",
+      "Slightly tired but functional",
+      "Noticeably fatigued",
+      "Exhausted",
+      "Completely fried"
     ],
     answer: 0
   },
@@ -137,11 +137,11 @@ export const quizData = [
   {
     question: "How aware are you of your current mental state during the workday (energized vs. fatigued, focused vs. scattered)?",
     options: [
-      "Highly aware (constantly monitoring)",
-      "Moderately aware (check in periodically)",
-      "Somewhat aware (notice when it's extreme)",
-      "Rarely aware (only realize in retrospect)",
-      "Not aware at all (work on autopilot)"
+      "Highly aware",
+      "Moderately aware",
+      "Somewhat aware",
+      "Rarely aware",
+      "Not aware at all"
     ],
     answer: 0
   },
@@ -159,9 +159,9 @@ export const quizData = [
   {
     question: "Rate your ability to resist immediate distractions (phone notifications, browser tabs, random thoughts):",
     options: [
-      "1 - No resistance, instantly distracted",
+      "1",
     
-      "10 - Complete control, can stay focused despite temptations"
+      "10"
     ],
     answer: 0
   }
