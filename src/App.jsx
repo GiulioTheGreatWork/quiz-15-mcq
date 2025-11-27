@@ -4,11 +4,36 @@ import { quizData } from './data'
 import jsPDF from 'jspdf'
 
 function App() {
+  const [email, setEmail] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [emailValidated, setEmailValidated] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [isFading, setIsFading] = useState(false)
   const [showResults, setShowResults] = useState(false)
   const [answers, setAnswers] = useState([])
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  const handleEmailSubmit = (e) => {
+    e.preventDefault()
+    setEmailError('')
+
+    if (!email.trim()) {
+      setEmailError('Please enter your email address')
+      return
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address')
+      return
+    }
+
+    setEmailValidated(true)
+  }
 
   const handleAnswerClick = (answerIndex) => {
     if (selectedAnswer !== null) return // Prevent multiple clicks
@@ -46,6 +71,9 @@ function App() {
     setIsFading(false)
     setShowResults(false)
     setAnswers([])
+    setEmailValidated(false)
+    setEmail('')
+    setEmailError('')
   }
 
   const handleDownload = () => {
@@ -120,6 +148,36 @@ function App() {
     // Save the PDF
     const fileName = `attention-assessment-${new Date().toISOString().split('T')[0]}.pdf`
     doc.save(fileName)
+  }
+
+  if (!emailValidated) {
+    return (
+      <div className="quiz-container">
+        <div className="email-form-container fade-in">
+          <h1 className="email-form-title">Attention Capacity Assessment</h1>
+          <p className="email-form-subtitle">Please enter your email address to begin</p>
+          <form onSubmit={handleEmailSubmit} className="email-form">
+            <div className="email-input-group">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                  setEmailError('')
+                }}
+                placeholder="Enter your email address"
+                className={`email-input ${emailError ? 'error' : ''}`}
+                autoFocus
+              />
+              {emailError && <p className="email-error">{emailError}</p>}
+            </div>
+            <button type="submit" className="email-submit-button">
+              Start Assessment
+            </button>
+          </form>
+        </div>
+      </div>
+    )
   }
 
   if (showResults) {
