@@ -36,8 +36,11 @@ function App() {
   }
 
   const handleAnswerClick = (answerIndex) => {
-    if (selectedAnswer !== null) return // Prevent multiple clicks during auto-advance
-
+    if (isFading) return // Prevent clicks during transition
+    
+    // Allow changing answer if already selected
+    const isChangingAnswer = selectedAnswer !== null && selectedAnswer !== answerIndex
+    
     setSelectedAnswer(answerIndex)
     
     // Save the answer
@@ -50,7 +53,8 @@ function App() {
     }
     setAnswers(newAnswers)
 
-    // Fade out animation
+    // Only auto-advance if this is a new selection (not just changing)
+    // But always auto-advance after a short delay
     setIsFading(true)
 
     // Auto-advance after fade animation
@@ -253,6 +257,16 @@ function App() {
 
         <h1 className="question-text">{question.question}</h1>
 
+        <div className="navigation-buttons">
+          <button
+            className="nav-button prev-button"
+            onClick={handlePrevious}
+            disabled={currentQuestion === 0 || isFading}
+          >
+            ← Previous
+          </button>
+        </div>
+
         <div className="options-container">
           {question.options.map((option, index) => {
             const isSelected = selectedAnswer === index
@@ -267,22 +281,12 @@ function App() {
                 key={index}
                 className={buttonClass}
                 onClick={() => handleAnswerClick(index)}
-                disabled={selectedAnswer !== null || isFading}
+                disabled={isFading}
               >
                 {option}
               </button>
             )
           })}
-        </div>
-
-        <div className="navigation-buttons">
-          <button
-            className="nav-button prev-button"
-            onClick={handlePrevious}
-            disabled={currentQuestion === 0 || isFading}
-          >
-            ← Previous
-          </button>
         </div>
       </div>
     </div>
