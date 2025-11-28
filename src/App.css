@@ -147,6 +147,8 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transform: translateZ(0);
+  will-change: transform, box-shadow, background;
 }
 
 .option-button::before {
@@ -158,6 +160,7 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   transition: left 0.5s;
+  pointer-events: none;
 }
 
 .option-button:hover:not(:disabled)::before {
@@ -168,7 +171,7 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-color: #667eea;
   color: white;
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-2px) translateZ(0);
   box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
 }
 
@@ -182,7 +185,7 @@
   border-color: #667eea;
   color: white;
   box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
-  transform: scale(1.02);
+  transform: translateZ(0);
 }
 
 /* Navigation Buttons */
