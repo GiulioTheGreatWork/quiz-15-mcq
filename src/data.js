@@ -27,7 +27,7 @@ export const quizData = [
   {
     question: "Rate your ability to sustain deep focus during your peak cognitive hours:",
     options: [
-      "1",
+      "0",
 
       "10"
     ],
@@ -93,9 +93,12 @@ export const quizData = [
   {
     question: "Rate your mental clarity when you first wake up (before coffee):",
     options: [
-      "0",
-     
-      "10"
+      "0 - Completely foggy, can barely think",
+      "2 - Very Slow, mind feels heavy",
+      "4 - A bit dull, need time to 'boost up' ",
+      "6 - Mostly clear but not fully sharp",
+      "8 - Clear and focused wwith slight warm-up needed",
+      "10 - Crystal clear, mentally sharp immediately"
     ],
     answer: 0
   },
