@@ -36,11 +36,15 @@ function App() {
   }
 
   const handleAnswerClick = (answerIndex) => {
-    if (selectedAnswer !== null) return // Prevent multiple clicks
+    if (selectedAnswer !== null && selectedAnswer === answerIndex) {
+      // Allow deselecting if clicking the same option
+      setSelectedAnswer(null)
+      return
+    }
 
     setSelectedAnswer(answerIndex)
     
-    // Save the answer
+    // Save the answer immediately
     const newAnswers = [...answers]
     newAnswers[currentQuestion] = {
       questionIndex: currentQuestion,
@@ -49,20 +53,60 @@ function App() {
       selectedOption: quizData[currentQuestion].options[answerIndex]
     }
     setAnswers(newAnswers)
+  }
 
-    // Fade out animation
+  const handlePrevious = () => {
+    if (currentQuestion === 0 || isFading) return
+
+    // Save current answer before moving
+    if (selectedAnswer !== null) {
+      const newAnswers = [...answers]
+      newAnswers[currentQuestion] = {
+        questionIndex: currentQuestion,
+        question: quizData[currentQuestion].question,
+        selectedOptionIndex: selectedAnswer,
+        selectedOption: quizData[currentQuestion].options[selectedAnswer]
+      }
+      setAnswers(newAnswers)
+    }
+
     setIsFading(true)
+    setTimeout(() => {
+      const prevQuestion = currentQuestion - 1
+      setCurrentQuestion(prevQuestion)
+      // Restore previous answer if exists
+      const prevAnswer = answers[prevQuestion]
+      setSelectedAnswer(prevAnswer ? prevAnswer.selectedOptionIndex : null)
+      setIsFading(false)
+    }, 500)
+  }
 
-    // After fade animation, move to next question or show results
+  const handleNext = () => {
+    if (selectedAnswer === null || isFading) return // Must select an answer first
+
+    // Save the answer
+    const newAnswers = [...answers]
+    newAnswers[currentQuestion] = {
+      questionIndex: currentQuestion,
+      question: quizData[currentQuestion].question,
+      selectedOptionIndex: selectedAnswer,
+      selectedOption: quizData[currentQuestion].options[selectedAnswer]
+    }
+    setAnswers(newAnswers)
+
+    setIsFading(true)
     setTimeout(() => {
       if (currentQuestion < quizData.length - 1) {
-        setCurrentQuestion(currentQuestion + 1)
-        setSelectedAnswer(null)
+        const nextQuestion = currentQuestion + 1
+        setCurrentQuestion(nextQuestion)
+        // Restore previous answer if exists
+        const prevAnswer = newAnswers[nextQuestion]
+        setSelectedAnswer(prevAnswer ? prevAnswer.selectedOptionIndex : null)
         setIsFading(false)
       } else {
         setShowResults(true)
       }
-    }, 500) // Match CSS transition duration
+    }, 500)
   }
 
   const handleRestart = () => {
@@ -238,12 +282,37 @@ function App() {
                 key={index}
                 className={buttonClass}
                 onClick={() => handleAnswerClick(index)}
-                disabled={selectedAnswer !== null}
               >
                 {option}
               </button>
             )
           })}
+        </div>
+
+        <div className="navigation-buttons">
+          <button
+            className="nav-button prev-button"
+            onClick={handlePrevious}
+            disabled={currentQuestion === 0}
+          >
+            ← Previous
+          </button>
+          {currentQuestion === quizData.length - 1 && selectedAnswer !== null ? (
+            <button
+              className="nav-button next-button"
+              onClick={handleNext}
+            >
+              Finish →
+            </button>
+          ) : (
+            <button
+              className="nav-button next-button"
+              onClick={handleNext}
+              disabled={selectedAnswer === null}
+            >
+              Next →
+            </button>
+          )}
         </div>
       </div>
     </div>
