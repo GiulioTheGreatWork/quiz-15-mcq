@@ -8,7 +8,7 @@ import jsPDF from 'jspdf'
 const scoringConfig = [
   [6, 5, 4, 3, 2, 1], // Q1: Focus duration (6 options)
   [6, 5, 4, 3, 2, 1], // Q2: Task switching (6 options)
-  null, // Q3: Rate 0-10 (will calculate from value)
+  [1, 2, 3, 4, 5], // Q3: Rate 1-5 (sustain deep focus)
   [6, 5, 4, 3, 2], // Q4: Return to focus (5 options)
   [6, 5, 4, 3, 2], // Q5: Deep work hours (5 options)
   [6, 5, 4, 3, 2, 1], // Q6: Focus decline timing (6 options)
@@ -20,7 +20,7 @@ const scoringConfig = [
   [6, 5, 4, 3, 2], // Q12: Redirect attention (5 options)
   [6, 5, 4, 3, 2], // Q13: Mental state awareness (5 options)
   [6, 5, 4, 3, 2], // Q14: Flow states (5 options)
-  null, // Q15: Resist distractions 1-10 (will calculate from value)
+  [1, 2, 3, 4, 5], // Q15: Rate 1-5 (resist distractions)
 ]
 
 // Category definitions
@@ -168,18 +168,9 @@ function App() {
     answers.forEach((answer) => {
       const questionIndex = answer.questionIndex
       const optionIndex = answer.selectedOptionIndex
-      const optionText = answer.selectedOption
       
-      // Handle rating scale questions (Q3 and Q15)
-      if (questionIndex === 2 || questionIndex === 14) {
-        // Extract number from option text (e.g., "10" or "0" or "8 - Clear...")
-        const match = optionText.match(/(\d+)/)
-        if (match) {
-          const value = parseInt(match[1])
-          // Scale 0-10 to 0-6 points
-          totalScore += Math.round((value / 10) * 6)
-        }
-      } else if (scoringConfig[questionIndex] && optionIndex < scoringConfig[questionIndex].length) {
+      // Use scoring config for all questions
+      if (scoringConfig[questionIndex] && optionIndex < scoringConfig[questionIndex].length) {
         totalScore += scoringConfig[questionIndex][optionIndex]
       }
     })

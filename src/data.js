@@ -27,9 +27,11 @@ export const quizData = [
   {
     question: "Rate your ability to sustain deep focus during your peak cognitive hours:",
     options: [
-      "0",
-
-      "10"
+      "1 – Struggle to focus: Easily distracted, rarely sustain deep work.",
+      "2 – Some focus: Can focus for short bursts, but often interrupted.",
+      "3 – Moderate focus: Maintain attention for moderate periods, occasional lapses.",
+      "4 – Strong focus: Can sustain deep work most of the time during peak hours.",
+      "5 – Exceptional focus: Rarely distracted, fully immersed in deep work during peak cognitive periods."
     ],
     answer: 0
   },
@@ -162,9 +164,11 @@ export const quizData = [
   {
     question: "Rate your ability to resist immediate distractions (phone notifications, browser tabs, random thoughts):",
     options: [
-      "1",
-    
-      "10"
+      "1 – Constantly distracted: Hardly resist notifications or random thoughts.",
+      "2 – Occasionally distracted: Can focus briefly but often give in to interruptions.",
+      "3 – Moderately focused: Manage to resist some distractions, but attention still breaks.",
+      "4 – Mostly focused: Rarely get pulled away, maintain attention most of the time.",
+      "5 – Highly focused: Strong resistance to distractions, sustain attention effortlessly."
     ],
     answer: 0
   }
