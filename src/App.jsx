@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { quizData } from './data'
 import jsPDF from 'jspdf'
-import { supabase } from './supabase'
+import { supabase, isSupabaseAvailable } from './supabase'
 
 // Scoring configuration: points for each option (0 = worst, 6 = best)
 // For rating scales, we'll calculate based on the option value
@@ -206,24 +206,26 @@ function App() {
       return
     }
 
-    // Save email to Supabase
-    try {
-      const { error } = await supabase
-        .from('quiz_attempts')
-        .insert([
-          {
-            email: email.trim(),
-            attempted_at: new Date().toISOString()
-          }
-        ])
+    // Save email to Supabase (only if configured)
+    if (isSupabaseAvailable() && supabase) {
+      try {
+        const { error } = await supabase
+          .from('quiz_attempts')
+          .insert([
+            {
+              email: email.trim(),
+              attempted_at: new Date().toISOString()
+            }
+          ])
 
-      if (error) {
-        console.error('Error saving email to Supabase:', error)
+        if (error) {
+          console.error('Error saving email to Supabase:', error)
+          // Still allow user to proceed even if save fails
+        }
+      } catch (err) {
+        console.error('Error saving email to Supabase:', err)
         // Still allow user to proceed even if save fails
       }
-    } catch (err) {
-      console.error('Error saving email to Supabase:', err)
-      // Still allow user to proceed even if save fails
     }
 
     setEmailValidated(true)
