@@ -13,7 +13,7 @@ export const quizData = [
     answer: 0
   },
   {
-    question: "How many times per hour do you estimate you switch tasks or check notifications during focused work?",
+    question: "How many times per hour do you estimate you switch tasks or check notifications during focused work ?",
     options: [
       "0-2 times",
       "3-5 times",
@@ -61,7 +61,7 @@ export const quizData = [
   {
     question: "When during the day does your focus typically decline most noticeably?",
     options: [
-      "Consistent all day",
+      "Consistently throughout the day",
       "10-11 AM",
       "1-3 PM",
       "3-5 PM",
