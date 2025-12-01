@@ -24,3 +24,24 @@ export const supabase = isSupabaseConfigured
 // Helper function to check if Supabase is available
 export const isSupabaseAvailable = () => isSupabaseConfigured
 
+// Function to save quiz attempt to Supabase
+export async function saveQuizAttempt(email) {
+  if (!supabase) {
+    console.error('Supabase client not initialized')
+    return
+  }
+
+  const { data, error } = await supabase
+    .from('quiz_attempts')
+    .insert({ email, attempted_at: new Date().toISOString() })
+    .select('id, email, attempted_at')
+
+  if (error) {
+    console.error('Error saving email to Supabase:', error)
+  } else {
+    console.log('Saved successfully:', data)
+  }
+
+  return { data, error }
+}
+
