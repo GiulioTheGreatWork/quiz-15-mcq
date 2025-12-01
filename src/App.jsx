@@ -209,23 +209,36 @@ function App() {
     // Save email to Supabase (only if configured)
     if (isSupabaseAvailable() && supabase) {
       try {
-        const { error } = await supabase
+        console.log('Attempting to save email to Supabase:', email.trim())
+        // Explicitly specify only the columns that exist in the table
+        const { data, error } = await supabase
           .from('quiz_attempts')
-          .insert([
-            {
-              email: email.trim(),
-              attempted_at: new Date().toISOString()
-            }
-          ])
+          .insert({
+            email: email.trim(),
+            attempted_at: new Date().toISOString()
+          })
+          .select('id, email, attempted_at')
 
         if (error) {
           console.error('Error saving email to Supabase:', error)
+          console.error('Error details:', {
+            message: error.message,
+            details: error.details,
+            hint: error.hint,
+            code: error.code
+          })
           // Still allow user to proceed even if save fails
+        } else {
+          console.log('Email successfully saved to Supabase:', data)
         }
       } catch (err) {
-        console.error('Error saving email to Supabase:', err)
+        console.error('Exception saving email to Supabase:', err)
         // Still allow user to proceed even if save fails
       }
+    } else {
+      console.warn('Supabase is not configured. Environment variables missing.')
+      console.warn('VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL ? 'Set' : 'Missing')
+      console.warn('VITE_SUPABASE_ANON_KEY:', import.meta.env.VITE_SUPABASE_ANON_KEY ? 'Set' : 'Missing')
     }
 
     setEmailValidated(true)
